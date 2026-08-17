@@ -12,170 +12,238 @@
 
 ## 📌 Overview
 
-**E-Store Pulse** is a full-stack data analytics project that simulates a real-world e-commerce reporting workflow — from raw transactional data to a decision-ready dashboard. The project answers key business questions for stakeholders:
+**E-Store Pulse** is a full-stack data analytics project that simulates a real-world e-commerce reporting workflow — from raw transactional data to a decision-ready dashboard.
+
+The project answers key business questions such as:
 
 - What are our total orders, gross sales, and net revenue?
-- How healthy is our order fulfillment (shipped / delivered / returned / cancelled)?
+- How healthy is our order fulfillment (Shipped / Delivered / Returned / Cancelled)?
 - Which payment methods do customers prefer?
 - How does performance vary by region and product?
 - How does discounting behavior change with order quantity?
 - Is revenue trending up or down year over year?
 
-The workflow mirrors a typical analyst pipeline: **SQL** for data modeling and querying → **Excel** for structured reporting and validation → **Power BI** for interactive visualization.
+The workflow mirrors a real analyst pipeline:
+
+**PostgreSQL → Excel → Power BI**
 
 ---
 
-## 🎥 Dashboard Demo
+# 🎥 Dashboard Demo
 
-> 📹 *Video walkthrough of the live Power BI dashboard — filtering by product and region, exploring KPIs in real time.*
+> **Interactive walkthrough of the Power BI dashboard** showing KPI cards, slicers, sales trends, payment analysis, and regional performance.
 
-<!--
-  Upload project2.mp4 to the repo (e.g. under /assets) or to GitHub via a release/issue attachment,
-  then replace the link below with the raw video URL, or embed a GIF preview here.
+<p align="center">
+  <a href="./project2.mp4">
+    <img src="https://img.shields.io/badge/▶️_Watch_Live_Dashboard_Demo-Click_Here-red?style=for-the-badge" alt="Watch Demo">
+  </a>
+</p>
 
-  Example:
-  https://github.com/Ganes-Sargar/estore-pulse-analytics/assets/<attachment-id>/project2.mp4
--->
-🔗 **[Watch the demo video](#)**
+<p align="center">
+  <sub>Click the button above to play the complete dashboard walkthrough.</sub>
+</p>
 
 ---
 
 ## 🧰 Tech Stack
 
 | Layer | Tool | Purpose |
-|---|---|---|
-| Database | **PostgreSQL** | Schema design, data storage, business-logic queries |
-| Reporting | **Microsoft Excel** | Pivot-style summary sheets, formula-driven KPIs |
-| Visualization | **Power BI** | Interactive dashboard with slicers, KPI cards, trend charts |
-| Data | **CSV** | Portable raw dataset used across all three tools |
+|-------|------|----------|
+| Database | PostgreSQL | Schema design, data storage, business analysis |
+| Reporting | Microsoft Excel | KPI summaries and validation |
+| Visualization | Power BI | Interactive dashboard |
+| Data | CSV | Raw transactional dataset |
 
 ---
 
-## 📊 Dashboard Preview
+## 📊 Dashboard Features
 
-The Power BI report — **"E-Store Pulse: Performance Analytics"** — includes:
+The Power BI dashboard includes:
 
-| KPI Cards | Visuals |
-|---|---|
-| Total Orders · Gross Sales · Net Revenue · Total Quantity · Return Rate (%) | Order Status (bar) · Payment Mode (donut) · Discount Frequency by Quantity (pie) · Sales Count Trend (area, 2022–2024) |
+### KPI Cards
 
-**Slicers:** `Product_Name` (10 categories) and `Region` (North / South / East / West) for full cross-filtering.
+- 📦 Total Orders
+- 💰 Gross Sales
+- 💵 Net Revenue
+- 🛒 Total Quantity
+- 🔄 Return Rate
+
+### Interactive Visuals
+
+- Order Status Distribution
+- Payment Mode Breakdown
+- Discount Frequency by Quantity
+- Sales Trend (2022–2024)
+
+### Slicers
+
+- Product Name (10 categories)
+- Region (North, South, East, West)
 
 ---
 
 ## 🗂️ Repository Structure
 
-```
-estore-pulse-analytics/
-├── data/
-│   └── ecommerce_orders.csv        # Raw transactional dataset (6,000 orders)
-├── sql/
-│   └── ecommerce_analysis.sql      # Schema, data load & business analysis queries
-├── ecommerce_analysis.xlsx         # Excel workbook: Raw_Data + formula-driven Dashboard_Summary
-└── README.md
+```text
+E-Store-Pulse/
+├── LICENSE
+├── README.md
+├── ecommerce_analysis.sql
+├── ecommerce_analysis.xlsx
+├── ecommerce_orders.csv
+└── project2.mp4
 ```
 
 ---
 
 ## 📁 Dataset
 
-**File:** `data/ecommerce_orders.csv` | **Rows:** 6,000 orders | **Period:** Jan 2022 – Dec 2024
+**File:** `ecommerce_orders.csv`
+
+| Detail | Value |
+|--------|-------|
+| Rows | 6,000 Orders |
+| Period | Jan 2022 – Dec 2024 |
+| Type | Synthetic Portfolio Dataset |
+
+### Dataset Columns
 
 | Column | Description |
-|---|---|
-| `Order_ID` | Unique order identifier |
-| `Order_Date` | Date the order was placed |
-| `Customer_ID` / `Customer_Name` | Customer identifiers |
-| `Product_Name` | Backpack, Camera, Headphones, Keyboard, Laptop, Mobile, Mouse, Shoes, T-Shirt, Watch |
-| `Category` | Electronics / Fashion / Accessories |
-| `Region` / `City` | Order geography (North, South, East, West) |
-| `Quantity` | Units ordered (1–5) |
-| `Unit_Price`, `Gross_Sales` | Pricing and pre-discount revenue |
-| `Discount_Percent`, `Discount_Amount` | Discount applied |
-| `Net_Revenue` | Revenue after discount |
-| `Payment_Mode` | Cash on Delivery, Debit Card, Credit Card, UPI, Net Banking |
-| `Order_Status` | Shipped, Delivered, Returned, Cancelled |
-| `Is_Returned` | 1 if the order was returned, else 0 |
+|--------|-------------|
+| Order_ID | Unique order ID |
+| Order_Date | Purchase date |
+| Customer_ID | Customer identifier |
+| Customer_Name | Customer name |
+| Product_Name | Product purchased |
+| Category | Electronics / Fashion / Accessories |
+| Region | North / South / East / West |
+| City | Customer city |
+| Quantity | Units ordered |
+| Unit_Price | Product price |
+| Gross_Sales | Before discount |
+| Discount_Percent | Discount applied |
+| Discount_Amount | Discount value |
+| Net_Revenue | Revenue after discount |
+| Payment_Mode | UPI, Card, COD, etc. |
+| Order_Status | Delivered, Returned, etc. |
+| Is_Returned | Return flag |
 
-> Data is synthetically generated to realistically reflect e-commerce order patterns for portfolio/demo purposes.
+> The dataset is synthetically generated to simulate realistic e-commerce business scenarios.
 
 ---
 
 ## 🗃️ SQL Analysis
 
-**File:** `sql/ecommerce_analysis.sql`
+**File:** `ecommerce_analysis.sql`
 
-Includes schema DDL and 14 analytical queries covering the exact metrics on the dashboard:
+The SQL script includes:
 
-- KPI summary (orders, gross sales, net revenue, quantity, return rate)
-- Order status & payment mode breakdowns
-- Regional and product-level performance
-- Discount frequency by quantity
-- Yearly / monthly sales trend
-- Top cities & top customers by revenue
-- Return-rate hotspots by product × region
-- Month-over-month revenue growth (window functions)
+- Database schema creation
+- Data loading
+- Business KPI queries
+- Window functions
+- Trend analysis
+- Customer insights
+- Regional performance analysis
+
+### Example Query
 
 ```sql
--- Example: Total Orders, Gross Sales, Net Revenue, Total Quantity, Return Rate (%)
 SELECT
-    COUNT(*)                                        AS total_orders,
-    SUM(gross_sales)                                AS gross_sales,
-    SUM(net_revenue)                                AS net_revenue,
-    SUM(quantity)                                   AS total_quantity,
-    ROUND(100.0 * SUM(is_returned) / COUNT(*), 2)   AS return_rate_pct
+    COUNT(*) AS total_orders,
+    SUM(gross_sales) AS gross_sales,
+    SUM(net_revenue) AS net_revenue,
+    SUM(quantity) AS total_quantity,
+    ROUND(100.0 * SUM(is_returned) / COUNT(*), 2) AS return_rate_pct
 FROM ecommerce_orders;
 ```
 
 ---
 
-## 📈 Excel Workbook
+## 📈 Excel Reporting
 
 **File:** `ecommerce_analysis.xlsx`
 
-| Sheet | Contents |
-|---|---|
-| `Raw_Data` | Full dataset as a formatted Excel Table |
-| `Dashboard_Summary` | Live formulas (`SUM`, `COUNTIF`, `SUMIF`, `SUMIFS`) for KPI cards, order status, payment mode, regional, and product-level breakdowns |
-| `Read_Me` | Sheet-by-sheet notes |
+The workbook contains:
 
-All summary figures recalculate automatically if the raw data changes — no manual re-entry required.
+| Sheet | Purpose |
+|-------|---------|
+| Raw_Data | Complete dataset |
+| Dashboard_Summary | Formula-driven KPI dashboard |
+| Read_Me | Documentation |
+
+The Excel dashboard updates automatically whenever the raw dataset changes.
 
 ---
 
-## 🔑 Key Insights
+## 📊 Key Business Insights
 
-- Return rate holds steady around **25%** across all regions — signals a systemic fulfillment/quality issue worth investigating rather than a regional one.
-- **South** region leads in both order volume and net revenue.
-- **UPI** and **Net Banking** are the most-used digital payment modes, with **Cash on Delivery** still holding a meaningful share.
-- Sales volume peaked in **2023** before declining in 2024 — a trend worth flagging for stakeholders.
-- Discounting is fairly evenly distributed across order quantities, suggesting promotions aren't concentrated on bulk orders.
+- Return rate remains around **25%** across all regions.
+- **South Region** generates the highest revenue.
+- **UPI** and **Net Banking** dominate digital payments.
+- Sales volume peaks during **2023**.
+- Discounts remain fairly balanced across order quantities.
+
+These insights help stakeholders identify revenue trends, customer behavior, and operational opportunities.
 
 ---
 
 ## 🚀 How to Reproduce
 
-1. **Load the data into PostgreSQL**
-   ```bash
-   psql -d your_database -f sql/ecommerce_analysis.sql
-   \copy ecommerce_orders FROM 'data/ecommerce_orders.csv' DELIMITER ',' CSV HEADER;
-   ```
-2. **Open `ecommerce_analysis.xlsx`** to explore the formula-driven summary, or rebuild pivots directly from `Raw_Data`.
-3. **Connect Power BI** to the CSV/SQL table and recreate the KPI cards, slicers, and charts described above.
+### 1. Load SQL Database
+
+```bash
+psql -d your_database -f ecommerce_analysis.sql
+```
+
+Import CSV
+
+```sql
+\copy ecommerce_orders FROM 'ecommerce_orders.csv' DELIMITER ',' CSV HEADER;
+```
+
+### 2. Open Excel
+
+Explore the live KPI calculations inside `ecommerce_analysis.xlsx`.
+
+### 3. Open Power BI
+
+Connect Power BI to either:
+
+- PostgreSQL
+- CSV dataset
+
+Then recreate the dashboard using KPI cards, slicers, and charts.
+
+---
+
+## ⭐ Project Highlights
+
+- ✔ End-to-End Data Analytics Project
+- ✔ PostgreSQL Business Queries
+- ✔ Formula-Driven Excel Dashboard
+- ✔ Interactive Power BI Report
+- ✔ Synthetic Real-World Dataset
+- ✔ Recruiter-Friendly Portfolio Project
 
 ---
 
 ## 👤 Author
 
 **Ganesh Sargar**
-Final-year B.Tech CSE (IoT, Cyber Security & Blockchain) — Data Analyst | Data Enthusiast
 
-- GitHub: [@Ganes-Sargar](https://github.com/Ganes-Sargar)
-- LinkedIn: [ganesh-sargar-319386298](https://www.linkedin.com/in/ganesh-sargar-319386298)
-- Email: sargarganesh800@gmail.com
+Final-Year B.Tech CSE (IoT, Cyber Security & Blockchain)
+
+**Aspiring Data Analyst**
+
+- GitHub: **[@Ganes-Sargar](https://github.com/Ganes-Sargar)**
+- LinkedIn: **[ganesh-sargar-319386298](https://www.linkedin.com/in/ganesh-sargar-319386298)**
+- Email: **sargarganesh800@gmail.com**
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE) — free to use, modify, and share with attribution.
+This project is licensed under the **MIT License**.
+
+Feel free to use, modify, and share with proper attribution.
